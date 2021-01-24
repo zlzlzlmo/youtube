@@ -13,11 +13,14 @@ function App() {
     };
 
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${word}&key=AIzaSyCUM6ZViUOHvDPVLcgNNH60b_uP4hpDgKU`,
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${word}&type=video&key=AIzaSyCUM6ZViUOHvDPVLcgNNH60b_uP4hpDgKU`,
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => console.log(setVideos([...result.items])))
+      .then((result) =>
+        result.items.map((item) => ({ ...item, id: item.id.videoId }))
+      )
+      .then((result) => setVideos(result))
       .catch((error) => console.log("error", error));
   };
 
