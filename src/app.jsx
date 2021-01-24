@@ -20,8 +20,8 @@ function App() {
       const result = await response.json();
       setVideos([...result.items])
     }
+
     fetchItem();
-    console.log(videos);
 
   },[]);
   return <VideoList videos={videos}></VideoList>;
